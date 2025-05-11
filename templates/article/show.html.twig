@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails de l'Article{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Détails de l'Article</h1>
+    
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ article.nom }}</h5>
+            <p class="card-text">Prix: {{ article.prix }}</p>
+            <p class="card-text">Catégorie: {{ article.category.titre }}</p>
+            <p class="card-text">Description de la catégorie: {{ article.category.description }}</p>
+            
+            <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-dark">Modifier</a>
+            <a href="{{ path('article_index') }}" class="btn btn-secondary">Retour à la liste</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Articles{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Liste des Articles</h1>
+     {{ form_start(form) }}
+    <div class="form-row align-items-end">
+        <div class="col-md-4">
+            {{ form_row(form.nom) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_row(form.category) }}
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+            <a href="{{ path('article_index') }}" class="btn btn-secondary">Réinitialiser</a>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    {% if articles %}
+    <table id="articles" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Catégorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+            <tr>
+                <td>{{ article.nom }}</td>
+                <td>{{ article.prix }}</td>
+                <td>{{ article.category.titre }}</td>
+                <td>
+                    <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-dark">Détails</a>
+                    <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-dark">Modifier</a>
+                    <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger" 
+                       onclick="return confirm('Êtes-vous sûr de supprimer cet article?');">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{{ path('article_new') }}" class="btn btn-primary">Créer un nouvel article</a>
+            {% else %}
+        <p class="mt-4">Aucun article trouvé</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles par Prix{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Recherche par Prix</h1>
+
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-md-3">
+            {{ form_row(form.minPrice) }}
+        </div>
+        <div class="col-md-3">
+            {{ form_row(form.maxPrice) }}
+        </div>
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    {% if articles %}
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Catégorie</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ article.nom }}</td>
+                        <td>{{ article.prix }}</td>
+                        <td>{{ article.category.titre }}</td>
+                        <td>
+                            <!-- Vos boutons d'action -->
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="mt-4">Aucun article trouvé dans cette fourchette de prix</p>
+    {% endif %}
+</div>
+{% endblock %}
